@@ -14,7 +14,7 @@ class CreateUsersTable{
 				email      VARCHAR(50),
 				phone      VARCHAR(12),
 				date       DATE,
-				status     SMALLINT,
+				status     TINYINT,
 				PRIMARY KEY (id)
 			)
 		');
