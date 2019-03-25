@@ -12,8 +12,8 @@ class DB{
 	private static $connects = [];
 	
 	private static function connect($connector){
-		$configBd = Config::get()['db']['connections'][$connector];
 		if(!isset(self::$connects[$connector])){
+			$configBd = Config::get()['db']['connections'][$connector];
 			switch($configBd['provider']){
 				case 'mysql':
 					self::$connects[$connector] = new MySqlConnector($configBd['host'], 
