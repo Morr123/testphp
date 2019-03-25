@@ -20,16 +20,16 @@ class DB{
 																	 $configBd['username'], 
 																	 $configBd['password'], 
 																	 $configBd['db']);
-					break;
+					return self::$connects[$connector];
 				default:
 					throw new \Exception('Not found connect');
 			}
 		}
+		
+		return self::$connects[$connector];
 	}
 	
 	public static function execute($sql, $binding = [], $connector = false){
-		$connector = $connector ? $connector : self::$defaultConnect;
-		self::connect($connector);
-		return self::$connects[$connector]->execute($sql, $binding);
+		return self::connect($connector ? $connector : self::$defaultConnect)->execute($sql, $binding);
 	}
 }
