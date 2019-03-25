@@ -21,15 +21,7 @@ abstract class Model{
 	public static function create($arr){
 		$arr = array_intersect_key($arr, array_flip(static::$fillable));
 		$keys = array_keys($arr);
-		$fields = implode(', ', $keys);
-		$str = '';
-		foreach($keys as $key => $val){
-			$str .= "?";
-			if(count($keys)-1 !== $key){
-				$str .= ', ';
-			}		
-		}
-		
-		DB::execute('INSERT INTO ' . static::$tableName . ' ('.$fields.') VALUES ('.$str.')', array_values($arr));
+		$sqlArg = array_fill(0, count($keys), '?');
+		DB::execute('INSERT INTO ' . static::$tableName . ' ('.(implode(', ', $keys)).') VALUES ('.(implode(', ', $sqlArg)).')', array_values($arr));
 	}
 }

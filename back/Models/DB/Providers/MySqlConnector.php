@@ -15,7 +15,7 @@ class MySqlConnector implements ConnectorInterface{
 		if(count($binding) > 0){
 		
 			if(!$smtp = $this->connect->prepare($sql)){
-				$this->viewError();
+				$this->error();
 			}
 			
 			$bindType = '';
